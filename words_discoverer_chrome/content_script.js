@@ -260,8 +260,9 @@ function text_to_hl_nodes(text, dst) {
                 dst.push(document.createTextNode(text.slice(last_hl_end_pos, match.begin)));
             }
             last_hl_end_pos = match.end;
-            //span = document.createElement("span");
-            span = document.createElement("wdautohl-customtag");
+            span = document.createElement("span");
+            // wdautohl-customtag can not display in reddit, use _ instead of - can work.
+            // span = document.createElement("wdautohl-customtag");
             span.textContent = text.slice(match.begin, last_hl_end_pos);
             span.setAttribute("style", text_style);
             span.id = 'wdautohl_id_' + cur_wd_node_id;
