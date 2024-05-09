@@ -12,13 +12,13 @@ function do_load_dictionary(file_text) {
         var fields = lines[i].split('\t');
         if (i + 1 === lines.length && fields.length == 1)
             break;
-        var form = fields[0];
-        var lemma = fields[1];
+        var form = fields[0].trim();
+        var lemma = fields[1].trim();
         if (lemma !== prev_lemma) {
             rank += 1;
             prev_lemma = lemma;
         }
-        rare_words[fields[0]] = [fields[1], rank];
+        rare_words[form] = [lemma, rank];
     }
     local_storage = chrome.storage.local;
     local_storage.set({"words_discoverer_eng_dict": rare_words});
@@ -52,7 +52,7 @@ function do_load_idioms(file_text) {
             rare_words[key] = -1;
         }
         key = fields[0];
-        rare_words[key] = fields[1];
+        rare_words[key] = fields[1].trim();
     }
     local_storage = chrome.storage.local;
     local_storage.set({"wd_idioms": rare_words});
